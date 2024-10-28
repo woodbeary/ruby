@@ -39,8 +39,8 @@ An intelligent incident management system powered by Llama 3.2 1B running locall
 
 1. Clone the repository:
 bash
-git clone https://github.com/yourusername/incident-manager.git
-cd incident-manager
+git clone https://github.com/woodbeary/ruby.git
+cd ruby
 
 
 2. Install dependencies:
