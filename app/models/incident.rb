@@ -1,11 +1,9 @@
 class Incident < ApplicationRecord
+  belongs_to :user
+  belongs_to :priority_changed_by, class_name: 'User', optional: true
+  
   validates :title, presence: true
-  validates :description, presence: true
-  validates :status, presence: true, inclusion: { in: %w[open in_progress resolved] }
-
-  # Add any validations you need
-  validates :submitted_priority, inclusion: { in: %w[P1 P2 P3 P4] }, allow_nil: true
-  validates :final_priority, inclusion: { in: %w[P1 P2 P3 P4] }, allow_nil: true
-
-  # Remove the enum and just use string validation for now
+  validates :submitted_priority, presence: true
+  
+  # Add any other validations or relationships you need
 end

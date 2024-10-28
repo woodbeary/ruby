@@ -1,22 +1,19 @@
 databases:
-  - name: incident_manager_db
-    databaseName: incident_manager_production
-    user: incident_manager
+  - name: ruby_postgres
+    databaseName: ruby_postgres
+    user: ruby_postgres
     plan: free
 
 services:
   - type: web
-    name: incident-manager
-    runtime: ruby
-    plan: free
+    name: ruby
+    env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: "./bin/rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: incident_manager_db
+          name: ruby_postgres
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: RAILS_ENV
-        value: production
