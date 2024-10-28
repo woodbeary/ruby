@@ -15,7 +15,7 @@ class LlmService
         Priority (start with P): P
       PROMPT
 
-      response = HTTP.post("http://rubyllm.local:8080/completion", json: {
+      response = HTTP.post("http://104.28.85.145:8080/completion", json: {
         prompt: prompt,
         n_predict: 32,
         temperature: 0.3,
