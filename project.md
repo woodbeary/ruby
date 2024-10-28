@@ -1,7 +1,7 @@
-# Incident Management System with LLM Priority Assessment
+# Incident Management System with Local LLM Priority Assessment
 
 ## Project Overview
-A Rails-based incident management system inspired by Rootly, featuring automatic incident priority assessment using Gemini AI.
+A Rails-based incident management system with local Llama 3.2 1B integration running on Raspberry Pi 5 for incident priority assessment.
 
 ### Core Features
 1. **User Interface**
@@ -16,9 +16,10 @@ A Rails-based incident management system inspired by Rootly, featuring automatic
    - Priority levels (P1-P4)
 
 3. **LLM Integration**
-   - Gemini AI integration for priority assessment
-   - Structured JSON output for incident classification
-   - Override capability for managers
+   - Local Llama 3.2 1B running on Raspberry Pi 5
+   - REST API endpoint for priority assessment
+   - Priority confirmation modal with LLM suggestion
+   - Simple priority levels (P1-P4)
 
 ### Technical Stack
 - Ruby on Rails 7
@@ -29,6 +30,21 @@ A Rails-based incident management system inspired by Rootly, featuring automatic
 - Google Gemini API
 - Authentication (Devise)
 - Deployment: Vercel
+- Raspberry Pi 5 running Llama 3.2 1B
+- Simple Node.js API server
+- Local network deployment
+
+### Infrastructure Setup
+1. **Raspberry Pi Configuration**
+   - SSH setup
+   - Llama 3.2 1B installation
+   - Node.js API server
+   - Port forwarding configuration
+
+2. **Local Deployment**
+   - DNS configuration
+   - Router port forwarding
+   - SSL setup (optional)
 
 ### Project Setup Steps
 1. Create new Rails project

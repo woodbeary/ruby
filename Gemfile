@@ -54,3 +54,6 @@ end
 
 gem "view_component"
 gem "tailwindcss-rails"
+
+# Add this line if not already present
+gem 'http'

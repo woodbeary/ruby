@@ -1,0 +1,83 @@
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Loading State -->
+  <div data-priority-modal-target="loadingState" class="hidden fixed inset-0 bg-white z-50">
+    <div class="flex flex-col items-center justify-center min-h-screen">
+      <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
+      <h3 class="mt-4 text-lg font-semibold text-gray-900">Analyzing Incident Priority</h3>
+      <p class="mt-2 text-sm text-gray-500">Our AI is evaluating the incident details...</p>
+    </div>
+  </div>
+
+  <!-- Form Container -->
+  <div data-priority-modal-target="formContainer" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+    <div class="px-4 py-6 sm:p-8">
+      <h1 class="text-2xl font-semibold text-gray-900 mb-6">New Incident</h1>
+
+      <%= form_with(model: @incident, 
+          class: "space-y-6", 
+          data: { 
+            controller: "priority-modal",
+            priority_modal_target: "form",
+            turbo: false,
+            action: "submit->priority-modal#checkPriority"
+          }) do |f| %>
+        
+        <div>
+          <%= f.label :title, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-2">
+            <%= f.text_field :title, 
+                class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :description, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-2">
+            <%= f.text_area :description, rows: 4, 
+                class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
+                data: { priority_modal_target: "description" } %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :priority, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-2">
+            <%= f.select :final_priority, 
+                options_for_select([
+                  ['P1 - Critical', 'P1'],
+                  ['P2 - High', 'P2'],
+                  ['P3 - Medium', 'P3'],
+                  ['P4 - Low', 'P4']
+                ]), 
+                {}, 
+                class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6",
+                data: { priority_modal_target: "selectedPriority" } %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :status, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-2">
+            <%= f.select :status, 
+                options_for_select([['Open', 'open'], ['In Progress', 'in_progress'], ['Resolved', 'resolved']]), 
+                {}, 
+                class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+
+        <%= f.hidden_field :suggested_priority, data: { priority_modal_target: "suggestedPriority" } %>
+        
+        <div class="flex items-center justify-end gap-x-6">
+          <%= link_to "Cancel", incidents_path, 
+              class: "text-sm font-semibold leading-6 text-gray-900 hover:text-gray-700" %>
+          <%= f.submit "Create Incident", 
+              class: "rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
+              data: { 
+                priority_modal_target: "submitButton",
+                action: "click->priority-modal#checkPriority"
+              } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
